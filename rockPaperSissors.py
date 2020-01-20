@@ -1,29 +1,38 @@
 """
 Capstone Project 1 Spring 2020
 Rock, Paper, Sissors
+Author: Carson Richmond
 
 In this game the user will be asked to select
 Rock Paper or Sissors, the computer will do the
 same and a winner will be announced.
+
+Then the game will ask if the user will want to play agian.
 
 """
 #import random functions
 import random 
 #main function
 def main():
-	#welcome message
-	print("Welcome to Rock, Paper, Sissors")
-	#get computers choice
-	compChoice = get_compChoice()
-	print("Computer made its choice")
-	#get user choice
-	userChoice = get_userChoice()
-	print (userChoice)
-	#get winner
-	winner = get_winner(compChoice, userChoice)
-	#display choices & winner, or announce tie
-	#if tie automatic replay, if not ask if they want to play again
-	print(winner)
+	play = True
+	while play:
+		#welcome message
+		print("Welcome to Rock, Paper, Sissors")
+		#get computers choice
+		compChoice = get_compChoice()
+		#get user choice
+		userChoice = get_userChoice()
+		#get dicionary number
+		dicNum = rps.get(userChoice)
+		#get winner
+		winner = get_winner(compChoice, dicNum)
+		#display choices & winner, or announce tie
+		print(winner)
+		#found "play again" solution on stackoverflow.com
+		again = get_again()
+		if again == "no":
+			play = False
+			print("Goodbye!")
 
 #dictonary
 rps = {
@@ -41,8 +50,7 @@ def get_compChoice():
 #user choice
 def get_userChoice():
 	uC = input('Choose rock, paper, or sissors: ').lower()
-	del rps[uC]
-	return rps
+	return uC
 
 #winner
 def get_winner(cC, uC):
@@ -65,6 +73,10 @@ def get_winner(cC, uC):
 	elif cC == 3 and uC == 3:
 		winner = 'Tie, Sissors!'
 	return winner
+#asks user if they want to play agian
+def get_again():
+	playAgain = str(input("Do you want to play again, yes or no: ").lower())
+	return playAgain
 
 main()
 
